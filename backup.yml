@@ -1,0 +1,18 @@
+---
+- name: Playbook to backup ovirt-engine
+  hosts: all
+  tasks:
+    - name: Run engine-backup command
+      command: engine-backup --mode=backup --scope=all --file=engine.backup --log=engine-backup.log
+
+    - name: fetch backup from "{{ ansible_hostname }}"
+      fetch:
+        src: /root/engine.backup
+        dest: rhv-engine-backup
+
+    - name: fetch backup logs from "{{ ansible_hostname }}"
+      fetch:
+        src: /root/engine-backup.log
+        dest: rhv-engine-backup
+
+

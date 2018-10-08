@@ -1,0 +1,16 @@
+---
+- name: Playbook to copy backup file fetched from rhv-engine to another remote host
+  hosts: all
+  tasks:
+    - name: Create backup directory or validate if it exists
+      file:
+        path: /root/rhv-engine-backup
+        state: directory
+        mode: 0755
+
+    - name: Copy backup from localhost to remote host
+      copy:
+        src: rhv-engine-backup
+        dest: /root/rhv-engine-backup/engine.backup 
+        backup: yes
+        directory_mode: yes
