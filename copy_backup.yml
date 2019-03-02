@@ -10,7 +10,7 @@
 
     - name: Copy backup from localhost to remote host
       copy:
-        src: rhv-engine-backup
+        src: "rhv-engine-backup/{{ rhv_manager_fqdn }}"
         dest: /root/rhv-engine-backup/engine.backup 
         backup: yes
         directory_mode: yes
