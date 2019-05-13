@@ -3,7 +3,8 @@
   hosts: all
   tasks:
     - name: Run `rm` command on files more than 30 days old 
-      command: find /root/rhv-engine-backup/engine.backup/"{{ rhv_manager_fqdn }}"/root -mtime +30  -exec rm -f {} \;
+      shell: find /root/rhv-engine-backup/engine.backup/rhv-engine-backup-{{ item }}/*/root -mtime +30  -exec rm -f {} \;
+      with_items: "{{rhv_manager_hostnames}}"
 
 
 
