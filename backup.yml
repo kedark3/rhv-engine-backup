@@ -5,14 +5,14 @@
     - name: Run engine-backup command
       command: engine-backup --mode=backup --scope=all --file=engine.backup --log=engine-backup.log
 
-    - name: fetch backup from "{{ ansible_hostname }}"
+    - name: fetch backup from RHV Manager
       fetch:
         src: /root/engine.backup
-        dest: rhv-engine-backup
+        dest: "rhv-engine-backup-{{ ansible_hostname }}"
 
-    - name: fetch backup logs from "{{ ansible_hostname }}"
+    - name: fetch backup logs from RHV manager
       fetch:
         src: /root/engine-backup.log
-        dest: rhv-engine-backup
+        dest: "rhv-engine-backup-{{ ansible_hostname }}"
 
 

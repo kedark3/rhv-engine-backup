@@ -10,7 +10,8 @@
 
     - name: Copy backup from localhost to remote host
       copy:
-        src: "rhv-engine-backup/{{ rhv_manager_fqdn }}"
+        src: "rhv-engine-backup-{{ item }}"
         dest: /root/rhv-engine-backup/engine.backup 
         backup: yes
         directory_mode: yes
+      with_items: "{{ rhv_manager_hostnames }}"
